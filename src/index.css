@@ -1,25 +1,17 @@
 @import "@fontsource/nunito";
 @import "tailwindcss";
 
-@theme {
+@theme static {
     /* ALL ACCENT COLORS  */
     --color-accent1: #0c929c;
     --color-accent2: #ad631d;
     --color-accent3: #276cab;
     --color-accent4: #c4a03b;
 
-    /* --pomodoro-accent: var(--color-accent1);
-    --short-break-accent: var(--color-accent2);
-    --long-break-accent: var(--color-accent3); */
     --color-theme: var(--color-accent1);
 }
 
 :root {
-    /* --color-sea-teal: #0fa4af;
-    --color-orange: #e97000;
-    --color-blue: #2d79bf;
-    --color-yellow: #ecae00; */
-
     font-family: "Nunito", sans-serif;
 
     text-rendering: optimizeLegibility;
