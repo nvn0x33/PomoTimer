@@ -1,11 +1,31 @@
+@import "@fontsource/nunito";
 @import "tailwindcss";
 
+@theme {
+    /* ALL ACCENT COLORS  */
+    --color-accent1: #0fa4af;
+    --color-accent2: #e97000;
+    --color-accent3: #2d79bf;
+    --color-accent4: #ecae00;
+
+    --pomodoro-accent: var(--color-accent1);
+    --short-break-accent: var(--color-accent2);
+    --long-break-accent: var(--color-accent3);
+}
+
 :root {
-    --sans: system-ui, "Segoe UI", Roboto, sans-serif;
-    --heading: system-ui, "Segoe UI", Roboto, sans-serif;
-    --mono: ui-monospace, Consolas, monospace;
+    /* --color-sea-teal: #0fa4af;
+    --color-orange: #e97000;
+    --color-blue: #2d79bf;
+    --color-yellow: #ecae00; */
+
+    font-family: "Nunito", sans-serif;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
 }
