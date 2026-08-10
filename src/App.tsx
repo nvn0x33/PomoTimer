@@ -11,7 +11,7 @@ function App() {
     return (
         <>
             <Header />
-            <ActiveTask value={{ activeTask, setActiveTask }}>
+            <ActiveTask value={[activeTask, setActiveTask]}>
                 <main className="flex items-center justify-center">
                     <Timer />
                 </main>

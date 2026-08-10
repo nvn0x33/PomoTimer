@@ -11,7 +11,7 @@ export default function Timer() {
     const [activeTab, setActiveTab] = useState(TABS[0]);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-    const Task: string = useContext(ActiveTask);
+    const [Task, _] = useContext(ActiveTask);
     const intervalID = useRef(null);
 
     const startTimer = () => {
@@ -50,38 +50,42 @@ export default function Timer() {
     };
 
     return (
-        <div className="flex flex-col gap-12 bg-white/10 rounded-md px-16 py-4 text-center">
-            <div className="flex gap-4">
-                {TABS.map((tab) => (
-                    <button
-                        key={tab.name}
-                        onClick={() => {
-                            if (tab.name === activeTab.name) return;
+        <div className="text-center">
+            <div className="flex flex-col gap-12 bg-white/10 rounded-md px-16 py-4">
+                <div className="flex gap-4">
+                    {TABS.map((tab) => (
+                        <button
+                            key={tab.name}
+                            onClick={() => {
+                                if (tab.name === activeTab.name) return;
 
-                            stopTimer();
-                            setActiveTab(tab);
-                        }}
-                        className={`px-2 py-1 rounded-sm ${
-                            activeTab.name === tab.name
-                                ? "font-bold bg-black/20"
-                                : ""
-                        }`}
-                    >
-                        {tab.name}
-                    </button>
-                ))}
-            </div>
+                                stopTimer();
+                                setActiveTab(tab);
+                            }}
+                            className={`px-2 py-1 rounded-sm ${
+                                activeTab.name === tab.name
+                                    ? "font-bold bg-black/20"
+                                    : ""
+                            }`}
+                        >
+                            {tab.name}
+                        </button>
+                    ))}
+                </div>
 
-            <span className="font-extrabold text-8xl">
-                {msToMins(activeTab.ms)}
-            </span>
-            <div className="flex justify-between">
-                <Button
-                    text={isTimerRunning ? "PAUSE" : "START"}
-                    handleClick={toggleTimer}
-                />
-                <Button text={"RESET"} handleClick={resetTimer} />
+                <span className="font-extrabold text-8xl">
+                    {msToMins(activeTab.ms)}
+                </span>
+                <div className="flex justify-between">
+                    <Button
+                        text={isTimerRunning ? "PAUSE" : "START"}
+                        handleClick={toggleTimer}
+                    />
+                    <Button text={"RESET"} handleClick={resetTimer} />
+                </div>
             </div>
+            <br />
+            <span className="text-[1.1rem] font-bold">{Task}</span>
         </div>
     );
 }
