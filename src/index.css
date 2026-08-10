@@ -28,6 +28,10 @@ a {
     text-decoration: none;
 }
 
+button {
+    cursor: pointer;
+}
+
 .active-theme-button {
     border: 1px solid black;
 }
