@@ -1,27 +1,36 @@
 import { useRef, useState, useContext } from "react";
 import { ActiveTask } from "../contexts";
 import { msToMins } from "../utils/unit";
+import type { Tab } from "../types/Tab.ts";
 
-const TABS = [
+// Components
+import TabBox from "./TabBox";
+
+const TABS: Tab[] = [
     { name: "Pomodoro", defaultMs: 1500000, ms: 1500000 },
-    { name: "Short Break", defaultMs: 300000, ms: 300000 },
+    // { name: "Short Break", defaultMs: 300000, ms: 300000 },
+    { name: "Short Break", defaultMs: 10000, ms: 10000 },
     { name: "Long Break", defaultMs: 900000, ms: 900000 },
 ];
+
 export default function Timer() {
-    const [activeTab, setActiveTab] = useState(TABS[0]);
-    const [isTimerRunning, setIsTimerRunning] = useState(false);
+    const [activeTab, setActiveTab] = useState<Tab>(TABS[0]);
+    const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false);
 
     const [Task, _] = useContext(ActiveTask);
-    const intervalID = useRef(null);
+    const intervalID = useRef<number | null>(null);
 
     const startTimer = () => {
-        intervalID.current = setInterval(() => {
-            setActiveTab((prev) => {
-                const temp = { ...prev };
-                temp.ms -= 1000;
+        let isZero: boolean = false;
 
-                return { ...temp };
+        intervalID.current = setInterval(() => {
+            setActiveTab((prev: Tab) => {
+                if (prev.ms <= 1000) isZero = true;
+
+                return { ...prev, ms: prev.ms - 1000 };
             });
+
+            if (isZero) resetTimer();
         }, 1000);
         setIsTimerRunning(true);
     };
@@ -41,38 +50,24 @@ export default function Timer() {
 
     const resetTimer = () => {
         stopTimer();
-        setActiveTab((prev) => {
-            const temp = { ...prev };
-            temp.ms = temp.defaultMs;
+        setActiveTab((prev) => ({ ...prev, ms: prev.defaultMs }));
+    };
 
-            return { ...temp };
-        });
+    const changeTab = (tab: Tab) => {
+        if (tab.name === activeTab.name) return;
+
+        stopTimer();
+        setActiveTab(tab);
     };
 
     return (
         <div className="text-center">
             <div className="flex flex-col gap-12 bg-white/10 rounded-md px-16 py-4">
-                <div className="flex gap-4">
-                    {TABS.map((tab) => (
-                        <button
-                            key={tab.name}
-                            onClick={() => {
-                                if (tab.name === activeTab.name) return;
-
-                                stopTimer();
-                                setActiveTab(tab);
-                            }}
-                            className={`px-2 py-1 rounded-sm ${
-                                activeTab.name === tab.name
-                                    ? "font-bold bg-black/20"
-                                    : ""
-                            }`}
-                        >
-                            {tab.name}
-                        </button>
-                    ))}
-                </div>
-
+                <TabBox
+                    tabs={TABS}
+                    activeTab={activeTab}
+                    onSelect={changeTab}
+                />
                 <span className="font-extrabold text-8xl">
                     {msToMins(activeTab.ms)}
                 </span>
@@ -90,7 +85,13 @@ export default function Timer() {
     );
 }
 
-function Button({ text, handleClick }) {
+function Button({
+    text,
+    handleClick,
+}: {
+    text: string;
+    handleClick: () => void;
+}) {
     return (
         <button
             onClick={handleClick}
