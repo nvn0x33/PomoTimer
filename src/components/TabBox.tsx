@@ -1,6 +1,14 @@
 import type { Tab } from "../types/Tab.ts";
 
-export default function TabBox({ tabs, activeTab, onSelect }) {
+export default function TabBox({
+    tabs,
+    activeTab,
+    onSelect,
+}: {
+    tabs: Tab[];
+    activeTab: Tab;
+    onSelect: (tab: Tab) => void;
+}) {
     return (
         <div className="flex gap-4">
             {tabs.map((tab: Tab) => (

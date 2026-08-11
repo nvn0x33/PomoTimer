@@ -8,8 +8,7 @@ import TabBox from "./TabBox";
 
 const TABS: Tab[] = [
     { name: "Pomodoro", defaultMs: 1500000, ms: 1500000 },
-    // { name: "Short Break", defaultMs: 300000, ms: 300000 },
-    { name: "Short Break", defaultMs: 10000, ms: 10000 },
+    { name: "Short Break", defaultMs: 300000, ms: 300000 },
     { name: "Long Break", defaultMs: 900000, ms: 900000 },
 ];
 
