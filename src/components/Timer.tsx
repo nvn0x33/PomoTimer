@@ -24,8 +24,7 @@ export default function Timer() {
 
         intervalID.current = setInterval(() => {
             setActiveTab((prev: Tab) => {
-                if (prev.ms <= 1000) isZero = true;
-
+                isZero = prev.ms <= 1000;
                 return { ...prev, ms: prev.ms - 1000 };
             });
 
