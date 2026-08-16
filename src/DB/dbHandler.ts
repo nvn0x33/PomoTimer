@@ -8,8 +8,15 @@ export class Storage {
             LocalStorage.save(Storage.orderKey, "[]");
         }
     }
+
+    loadList() {
+        const order = LocalStorage.load(Storage.orderKey);
+        const taskList = order.map((key: string) => LocalStorage.load(key));
+
+        return taskList || [];
+    }
     clearAll() {
-        localStorage.clear();
+        LocalStorage.clear();
         LocalStorage.save(Storage.orderKey, "[]");
     }
     addTask(key: string, task) {
