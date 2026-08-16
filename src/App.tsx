@@ -5,6 +5,7 @@ import { ActiveTask } from "./contexts";
 // Components
 import Header from "./components/Header";
 import Timer from "./components/Timer";
+import TodoContainer from "./components/TodoContainer";
 
 function App() {
     const [activeTask, setActiveTask] = useState("Time to act!");
@@ -14,6 +15,7 @@ function App() {
             <ActiveTask value={[activeTask, setActiveTask]}>
                 <main className="flex items-center justify-center">
                     <Timer />
+                    <TodoContainer />
                 </main>
             </ActiveTask>
         </>
