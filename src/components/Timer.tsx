@@ -78,7 +78,7 @@ export default function Timer() {
                 </div>
             </div>
             <br />
-            <span className="text-[1.1rem] font-bold">{Task}</span>
+            <span className="text-[1.1rem]">{Task}</span>
         </div>
     );
 }
