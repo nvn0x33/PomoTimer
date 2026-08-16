@@ -4,6 +4,7 @@ export class LocalStorage {
     }
     static load(key) {
         const data = localStorage.getItem(key);
+
         return JSON.parse(data);
     }
     static remove(key) {
