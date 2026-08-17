@@ -61,7 +61,7 @@ export default function Timer() {
 
     return (
         <div className="text-center">
-            <div className="flex flex-col gap-12 bg-white/10 rounded-md px-16 py-4">
+            <div className="flex flex-col gap-12 bg-white/10 rounded-md px-16 py-4 max-md:px-8">
                 <TabBox
                     tabs={TABS}
                     activeTab={activeTab}

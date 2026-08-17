@@ -14,7 +14,7 @@ export default function Header() {
     };
 
     return (
-        <header className="w-1/2 m-auto max-md:w-full p-2">
+        <header className="w-1/2 m-auto max-md:w-full p-2 max-md:text-sm">
             <nav className="flex justify-between p-4 rounded-md bg-white/10">
                 <ThemeSwitcher
                     accentVars={accentVars}

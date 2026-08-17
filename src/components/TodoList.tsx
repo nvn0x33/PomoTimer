@@ -22,7 +22,7 @@ export default function TodoList() {
 
     return (
         <div className="flex flex-col">
-            <ul className="flex flex-col w-md">
+            <ul className="flex flex-col h-96 overflow-y-scroll">
                 {todoList.map((task: Task) => (
                     <TaskBox
                         key={task.id}
