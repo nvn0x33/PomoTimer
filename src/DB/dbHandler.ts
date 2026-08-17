@@ -37,7 +37,6 @@ export class Storage {
         const index: number = order.indexOf(key);
 
         order.splice(index, 1);
-        localStorage.setItem(Storage.orderKey, JSON.stringify(order));
         LocalStorage.save(Storage.orderKey, order);
     }
 }

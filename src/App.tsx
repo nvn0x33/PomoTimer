@@ -13,7 +13,7 @@ function App() {
         <>
             <Header />
             <ActiveTask value={[activeTask, setActiveTask]}>
-                <main className="flex items-center justify-center">
+                <main className="flex items-center justify-center gap-4 mt-8 max-md:flex-col">
                     <Timer />
                     <TodoContainer />
                 </main>

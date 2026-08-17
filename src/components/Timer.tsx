@@ -5,6 +5,7 @@ import type { Tab } from "../types/Tab.ts";
 
 // Components
 import TabBox from "./TabBox";
+import ThemeButton from "./ThemeButton.tsx";
 
 const TABS: Tab[] = [
     { name: "Pomodoro", defaultMs: 1500000, ms: 1500000 },
@@ -70,32 +71,15 @@ export default function Timer() {
                     {msToMins(activeTab.ms)}
                 </span>
                 <div className="flex justify-between">
-                    <Button
+                    <ThemeButton
                         text={isTimerRunning ? "PAUSE" : "START"}
                         handleClick={toggleTimer}
                     />
-                    <Button text={"RESET"} handleClick={resetTimer} />
+                    <ThemeButton text={"RESET"} handleClick={resetTimer} />
                 </div>
             </div>
             <br />
             <span className="text-[1.1rem]">{Task}</span>
         </div>
-    );
-}
-
-function Button({
-    text,
-    handleClick,
-}: {
-    text: string;
-    handleClick: () => void;
-}) {
-    return (
-        <button
-            onClick={handleClick}
-            className="bg-white px-8 py-2 text-theme font-bold text-lg"
-        >
-            {text}
-        </button>
     );
 }
