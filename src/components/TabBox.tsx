@@ -10,7 +10,7 @@ export default function TabBox({
     onSelect: (tab: Tab) => void;
 }) {
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-4 max-sm:gap-0">
             {tabs.map((tab: Tab) => (
                 <button
                     key={tab.name}
