@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { Plus } from "lucide-react";
+import { useContext } from "react";
+
 import { Storage } from "../DB/dbHandler";
 import { genTaskID } from "../utils/taskID";
+import { ActiveTask } from "../contexts";
+
 import type { Task } from "../types/Task";
 
 import ThemeButton from "./ThemeButton";
 import IconButton from "./IconButton";
-import { Plus } from "lucide-react";
 
 const todoDB = new Storage();
 
@@ -13,17 +17,34 @@ const todoDB = new Storage();
 
 export default function TodoList() {
     const [todoList, setTodoList] = useState<Task[]>(() => todoDB.loadList());
+    const inputTask = useRef(null);
 
     const addTask = () => {
         const key: string = genTaskID();
-        todoDB.addTask(key, { text: "TEST", status: "done", id: key });
+        todoDB.addTask(key, {
+            text: inputTask.current.value,
+            status: "pending",
+            id: key,
+        });
 
         const newTodo: Task[] = todoDB.loadList();
         setTodoList(newTodo);
+
+        inputTask.current.value = "";
     };
 
     return (
-        <div className="flex flex-col relative">
+        <div className="flex flex-col">
+            <div className="">
+                <input
+                    ref={inputTask}
+                    type="text"
+                    placeholder="What are you aiming for?"
+                />
+                <IconButton onClick={addTask}>
+                    <Plus size={20} strokeWidth={3} />
+                </IconButton>
+            </div>
             <ul className="flex flex-col h-96 overflow-y-scroll">
                 {todoList.map((task: Task) => (
                     <TaskBox
@@ -34,23 +55,24 @@ export default function TodoList() {
                     />
                 ))}
             </ul>
-            <div className="absolute top-0 right-0 left-0">
-                <input type="text" placeholder="What are you aiming for?" />
-                <IconButton>
-                    <Plus size={20} strokeWidth={3} />
-                </IconButton>
-            </div>
-            <ThemeButton text="Add Task" handleClick={addTask} />
+            <ThemeButton text="Add Task" handleClick={() => {}} />
         </div>
     );
 }
 
 function TaskBox({ text, id, status }: Task) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, setActiveTask] = useContext(ActiveTask);
+
+    const handleClick = () => {
+        setActiveTask(text);
+    };
     return (
         <li>
             <button
                 className={`p-4 ${status === "done" ? "line-through" : ""}`}
                 data-id={id}
+                onClick={handleClick}
             >
                 {text}
             </button>
